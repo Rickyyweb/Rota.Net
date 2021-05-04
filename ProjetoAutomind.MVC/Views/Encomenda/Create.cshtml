@@ -1,0 +1,114 @@
+﻿@model ProjetoAutomind.MVC.Models.Encomenda
+
+@{
+    ViewBag.Title = "Prova";
+}
+
+<h3>Tela de Registros</h3>
+
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Identificador, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Identificador, new { htmlAttributes = new { @class = "form-control", @maxlength = 8 } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.LabelFor(model => model.Volume, htmlAttributes: new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.Volume, new { htmlAttributes = new { @class = "form-control money", @maxlength = 5 } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="row">
+                    <div class="col-md-4">
+                        @Html.Label("Valor do frete", new { @class = "control-label" })
+                    </div>
+                    <div class="col-md-8">
+                        @Html.EditorFor(model => model.ValorFrete, new { htmlAttributes = new { @class = "form-control money", @maxlength = 5 } })
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-2">
+                <div class="row">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input id="btnAdicionar" type="button" value="Adicionar" class="btn btn-default btn-info" />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div style="min-height: 45px;"></div>
+        <fieldset>
+            <legend style="font-size: 16px;">Encomendas adicionadas</legend>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">
+                                    Identificador
+                                </th>
+                                <th scope="col">
+                                    Volume
+                                </th>
+                                <th scope="col">
+                                    Valor do frete
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </fieldset>
+        <div style="min-height: 45px;"></div>
+        <fieldset>
+            <legend style="font-size: 16px;">Calcular a melhor combinação</legend>
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.Label("Placa do caminhão", new { @class = "control-label" })
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="PlacaCaminhao" id="PlacaCaminhao" class="form-control" maxlength="7" />
+                </div>
+            </div>
+            <br />
+            <div class="row">
+                <div class="col-md-3">
+                    @Html.Label("Capacidade do caminhão", new { @class = "control-label" })
+                </div>
+                <div class="col-md-3">
+                    <input type="text" name="VolumeCaminhao" id="VolumeCaminhao" class="form-control money" maxlength="5" />
+                </div>
+                <div class="col-md-6">
+                    <input id="btnCalcular" type="button" value="Calcular" class="btn btn-default btn-primary" />
+                </div>
+            </div>
+        </fieldset>
+    </div>
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery.mask.min.js")
+    @Scripts.Render("~/Scripts/jquery-confirm.min.js")
+    @Scripts.Render("~/Scripts/Encomenda/Create.js")
+}
